@@ -86,29 +86,8 @@ html, body {
   z-index: 1;
 }
 
-/* Large glow 3 - Center - Bright */
-.gradient-bg > div::before {
-  width: 850px;
-  height: 850px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.55) 0%, rgba(30, 64, 175, 0.35) 35%, transparent 70%);
-  filter: blur(110px);
-  animation: moveGlowCenter1 16s ease-in-out infinite;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
-/* Medium glow 4 - Center Offset - Medium */
-.gradient-bg > div::after {
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.45) 0%, rgba(37, 99, 235, 0.25) 40%, transparent 70%);
-  filter: blur(95px);
-  animation: moveGlowCenter2 14s ease-in-out infinite;
-  top: 40%;
-  left: 55%;
-  transform: translate(-50%, -50%);
-}
+
 
 /* Create additional glows using pseudo-elements on body */
 body::before,

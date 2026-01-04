@@ -163,10 +163,10 @@ Christian Carl Paete,Web & Mobile App Developer,4 Years,12,5`;
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Profile Card with Tilt Effect */}
-          {/* POSITION ADJUSTMENT: Change 'x' value in whileInView to move left/right */}
+          {/* Right Side - Profile Card - SLIDE FROM RIGHT */}
+          {/* POSITION ADJUSTMENT: Change 'x' value in whileInView */}
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: 150 }}
             whileInView={{ opacity: 1, x: 300 }}  
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -178,25 +178,33 @@ Christian Carl Paete,Web & Mobile App Developer,4 Years,12,5`;
               onMouseLeave={handleMouseLeave}
               style={tiltStyle}
             >
-              {/* Card Content */}
-              <div className="w-full h-full bg-gradient-to-br from-gray-900/90 to-gray-800/90 rounded-2xl overflow-hidden backdrop-blur-sm">
-                {/* Top Section - Profile Image */}
-                <div className="h-2/3 flex items-center justify-center p-6">
-                  <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500/30">
-                    <Image
-                      src="/image/image1.jpg"
-                      alt="Christian Carl Paete"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+              {/* Card Content with Image as Background */}
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                {/* Background Image - Full Card */}
+                <div className="absolute inset-0">
+                  <Image
+                    src="/image/image1.jpg"
+                    alt="Christian Carl Paete"
+                    fill
+                    className="object-cover"
+                    style={{ 
+                      objectPosition: 'center 85%'  /* ← ADJUST THIS to move image up/down:
+                                                          - 'center top' = show top of image
+                                                          - 'center 20%' = slightly below top
+                                                          - 'center 30%' = more below (current)
+                                                          - 'center 40%' = even more below
+                                                          - 'center center' = centered
+                                                          - 'center 60%' = show lower part
+                                                          - 'center bottom' = show bottom */
+                    }}
+                  />
                 </div>
 
-                {/* Bottom Section - Info & Button */}
-                <div className="h-1/3 bg-white/10 backdrop-blur-md p-4 flex items-center justify-between">
+                {/* Bottom Section - Blur White Container */}
+                <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-white/10 backdrop-blur-sm p-4 flex items-center justify-between border-t border-white/20">
                   <div className="flex items-center gap-3">
-                    {/* Small Avatar */}
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500/50">
+                    {/* Small Circle Avatar */}
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/50 flex-shrink-0">
                       <Image
                         src="/image/image1.jpg"
                         alt="Christian Carl Paete"
@@ -206,16 +214,16 @@ Christian Carl Paete,Web & Mobile App Developer,4 Years,12,5`;
                     </div>
                     {/* User Info */}
                     <div>
-                      <p className="text-white font-semibold text-sm font-['Inter']">@Tiann.s092</p>
+                      <p className="text-white font-semibold text-sm font-['Inter'] drop-shadow-md">@Tiann.s092</p>
                       <div className="flex items-center gap-1">
-                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                        <span className="text-gray-300 text-xs font-['Fira_Code']">Online</span>
+                        <div className="w-2 h-2 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
+                        <span className="text-white text-xs font-['Fira_Code'] drop-shadow-md">Online</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Contact Button */}
-                  <button className="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-all font-['Inter']">
+                  {/* Contact Button - Blur White */}
+                  <button className="px-4 py-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white rounded-lg text-sm font-semibold hover:bg-white/30 transition-all font-['Inter'] drop-shadow-lg">
                     Contact Me
                   </button>
                 </div>
