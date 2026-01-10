@@ -76,15 +76,6 @@ html, body {
   z-index: 1;
 }
 
-/* Additional blur glows with varying sizes */
-.gradient-bg > div::before,
-.gradient-bg > div::after {
-  content: '';
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 1;
-}
 
 
 
@@ -228,7 +219,7 @@ body::after {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #1e40af, #1d4ed8);
+  background: linear-gradient(135deg, #1e40af00, #1d4fd800);
   border-radius: 5px;
 }
 

@@ -5,6 +5,9 @@ import { TypeAnimation } from 'react-type-animation';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useState, useEffect } from 'react';
 import About from '@/components/About';
+import Portfolio from '@/components/Portfolio';
+import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 // Header Component with Active Section Indicator
 function Header() {
@@ -269,57 +272,6 @@ function HeroSection() {
   );
 }
 
-// Placeholder sections - Always animate
-function Portfolio() {
-  return (
-    <section id="portfolio" className="min-h-screen flex items-center justify-center px-6 py-32">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: false, amount: 0.3 }}
-        transition={{ duration: 0.8 }}
-        className="container mx-auto text-center relative z-10"
-      >
-        <h2 className="text-5xl font-bold gradient-text font-['Space_Grotesk']">Portfolio</h2>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ delay: 0.3 }}
-          className="text-gray-400 mt-4 text-lg"
-        >
-          Coming Soon...
-        </motion.p>
-      </motion.div>
-    </section>
-  );
-}
-
-function Contact() {
-  return (
-    <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-32">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: false, amount: 0.3 }}
-        transition={{ duration: 0.8 }}
-        className="container mx-auto text-center relative z-10"
-      >
-        <h2 className="text-5xl font-bold gradient-text font-['Space_Grotesk']">Contact</h2>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ delay: 0.3 }}
-          className="text-gray-400 mt-4 text-lg"
-        >
-          Coming Soon...
-        </motion.p>
-      </motion.div>
-    </section>
-  );
-}
-
 // Main Home Page
 export default function Home() {
   return (
@@ -329,6 +281,7 @@ export default function Home() {
       <About />
       <Portfolio />
       <Contact />
+      <Footer />
     </div>
   );
 }

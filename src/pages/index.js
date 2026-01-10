@@ -130,7 +130,7 @@ function IntroLoading({ onLoadingComplete }) {
                 sequence={[
                   '',
                   500,
-                  'Tian.vercel.app',
+                  'Paete.vercel.app',
                   3000,
                 ]}
                 wrapper="span"
