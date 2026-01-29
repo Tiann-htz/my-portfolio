@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Code2, User, Github } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 
-// IntroLoading Component (inside index.js)
 function IntroLoading({ onLoadingComplete }) {
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
@@ -40,7 +39,6 @@ function IntroLoading({ onLoadingComplete }) {
     }),
   };
 
-  // Word-by-word animation from left to right
   const line1Words = ['Hey', 'there,', 'Welcome', 'to', 'my'];
   const line2Words = ['Portfolio', 'Website'];
   
@@ -57,6 +55,20 @@ function IntroLoading({ onLoadingComplete }) {
     }),
   };
 
+  // Slide up animation for both Portfolio and Website
+  const slideUpVariant = {
+    hidden: { y: 50, opacity: 0 },
+    visible: (i) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: 1.5 + (line1Words.length + i) * 0.15,
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    }),
+  };
+
   return (
     <AnimatePresence>
       {!fadeOut && (
@@ -64,9 +76,45 @@ function IntroLoading({ onLoadingComplete }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className="fixed inset-0 z-50 flex items-center justify-center gradient-bg"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black overflow-hidden"
         >
-          <div className="text-center space-y-8 px-4">
+          {/* Running Gradient Background - Left to Right - Dark Blue, Teal, Purple, Blue, Black */}
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              background: 'linear-gradient(90deg, #000000 0%, #001a33 10%, #0d1b2a 20%, #1a0a2e 30%, #002147 40%, #000000 50%, #001a33 60%, #0d1b2a 70%, #1a0a2e 80%, #002147 90%, #000000 100%)',
+              backgroundSize: '200% 100%',
+              filter: 'blur(60px)',
+            }}
+            animate={{
+              backgroundPosition: ['-100% 0%', '0% 0%'],
+            }}
+            transition={{
+              duration: 8,
+              ease: 'linear',
+              repeat: Infinity,
+            }}
+          />
+
+          {/* Additional blur layer for smoothness */}
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(circle at 50% 50%, rgba(10, 10, 26, 0.4) 0%, transparent 70%)',
+              filter: 'blur(40px)',
+            }}
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.5, 0.8, 0.5],
+            }}
+            transition={{
+              duration: 6,
+              ease: 'easeInOut',
+              repeat: Infinity,
+            }}
+          />
+
+          <div className="text-center space-y-8 px-4 relative z-10">
             {/* Icons Animation */}
             <div className="flex justify-center gap-8 mb-12">
               {[
@@ -86,7 +134,7 @@ function IntroLoading({ onLoadingComplete }) {
               ))}
             </div>
 
-            {/* Welcome Text - Word by word animation in two lines */}
+            {/* Welcome Text */}
             <div className="space-y-2">
               {/* First line */}
               <div className="flex justify-center gap-x-3 text-4xl md:text-5xl font-bold text-white font-['Space_Grotesk']">
@@ -103,15 +151,21 @@ function IntroLoading({ onLoadingComplete }) {
                 ))}
               </div>
               
-              {/* Second line */}
-              <div className="flex justify-center gap-x-3 text-4xl md:text-5xl font-bold gradient-text font-['Space_Grotesk']">
+              {/* Second line - Portfolio Website - Both slide up */}
+              <div className="flex justify-center gap-x-3 text-4xl md:text-5xl font-bold font-['Space_Grotesk']">
                 {line2Words.map((word, index) => (
                   <motion.span
-                    key={index}
-                    custom={line1Words.length + index}
-                    variants={wordVariants}
+                    key={word}
+                    custom={index}
+                    variants={slideUpVariant}
                     initial="hidden"
                     animate="visible"
+                    style={{
+                      background: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 25%, #2563eb 50%, #1d4ed8 75%, #1e40af 100%)',
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                    }}
                   >
                     {word}
                   </motion.span>
@@ -119,7 +173,7 @@ function IntroLoading({ onLoadingComplete }) {
               </div>
             </div>
 
-            {/* Typing Animation - Slower speed */}
+            {/* Typing Animation */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

@@ -4,10 +4,13 @@ import { Sparkles, Github, Mail, Instagram, Briefcase, MessageCircle } from 'luc
 import { TypeAnimation } from 'react-type-animation';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import ContactModal from '@/components/ContactModal';
 import About from '@/components/About';
 import Portfolio from '@/components/Portfolio';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import GlowBackground from '@/components/ui/GlowBackground';
 
 // Header Component with Active Section Indicator
 function Header() {
@@ -45,7 +48,14 @@ function Header() {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80; // Height of your fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -54,29 +64,42 @@ function Header() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 z-40 bg-black/50 backdrop-blur-xl border-b border-blue-800/20"
+      className="fixed top-0 left-0 right-0 z-40 bg-black/10 backdrop-blur-xl"
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-3xl font-bold gradient-text font-['Space_Grotesk']">
-          Tian
-        </Link>
+        <Link href="/" className="text-3xl font-bold font-['Space_Grotesk']"
+  style={{
+    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+    backgroundClip: 'text',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  }}
+>
+  &lt;Tian/&gt;
+</Link>
 
         {/* Navigation */}
         <nav className="flex gap-8">
           {navItems.map((item, index) => {
-            const isActive = activeSection === item.name.toLowerCase();
-            return (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index, duration: 0.5 }}
-                className={`transition-colors font-medium text-lg font-['Inter'] relative group ${
-                  isActive ? 'text-blue-500' : 'text-gray-300 hover:text-white'
-                }`}
+  const isActive = activeSection === item.name.toLowerCase();
+  return (
+    <motion.a
+      key={item.name}
+      href={item.href}
+      onClick={(e) => handleNavClick(e, item.href)}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 * index, duration: 0.5 }}
+      style={isActive ? {
+        background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+        backgroundClip: 'text',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+      } : {}}
+      className={`transition-colors font-medium text-lg font-['Inter'] relative group ${
+        isActive ? '' : 'text-gray-300 hover:text-white'
+      }`}
               >
                 {item.name}
                 <span 
@@ -95,6 +118,9 @@ function Header() {
 
 // HeroSection Component - Always animates
 function HeroSection() {
+  const router = useRouter();
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  
   const techStack = [
     { name: 'React', color: '#61DAFB' },
     { name: 'JavaScript', color: '#F7DF1E' },
@@ -103,9 +129,9 @@ function HeroSection() {
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/yourusername', label: 'GitHub' },
-    { icon: Mail, href: 'mailto:your.email@gmail.com', label: 'Email' },
-    { icon: Instagram, href: 'https://instagram.com/yourusername', label: 'Instagram' },
+    { icon: Github, href: 'https://github.com/Tiann-htz', label: 'GitHub' },
+    { icon: Mail, href: 'mailto:christiancarlpaete@gmail.com', label: 'Email' },
+    { icon: Instagram, href: 'https://www.instagram.com/htz.tiann', label: 'Instagram' },
   ];
 
   return (
@@ -120,16 +146,25 @@ function HeroSection() {
           className="space-y-6"
         >
           {/* Slogan with Icon */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ delay: 0.4 }}
-            className="flex items-center gap-2 text-blue-600"
-          >
-            <Sparkles className="w-5 h-5" />
-            <span className="text-lg font-['Fira_Code']">Building Digital Experiences</span>
-          </motion.div>
+         <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: false, amount: 0.3 }}
+  transition={{ delay: 0.4 }}
+  className="flex items-center gap-2"
+>
+  <Sparkles className="w-5 h-5 text-blue-500" />
+  <span className="text-lg font-['Fira_Code']"
+    style={{
+      background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+      backgroundClip: 'text',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+    }}
+  >
+    Building Digital Experiences
+  </span>
+</motion.div>
 
           {/* Main Titles with Typing Animation - WHITE TEXT */}
           <motion.div
@@ -139,22 +174,26 @@ function HeroSection() {
             transition={{ delay: 0.5 }}
           >
             <TypeAnimation
-              sequence={[
-                'Web Developer',
-                2000,
-                '',
-                500,
-                'Mobile App Developer',
-                2000,
-                '',
-                500,
-              ]}
-              wrapper="h1"
-              cursor={true}
-              repeat={Infinity}
-              speed={40}
-              className="text-5xl md:text-6xl font-bold text-white font-['Space_Grotesk'] leading-tight"
-            />
+  sequence={[
+    'Full Stack Developer',
+    2000,
+    '',
+    500,
+    'Mobile App Developer',
+    2000,
+    '',
+    500,
+    'Web Developer',
+    2000,
+    '',
+    500,
+  ]}
+  wrapper="h1"
+  cursor={true}
+  repeat={Infinity}
+  speed={40}
+  className="text-5xl md:text-6xl font-bold text-white font-['Space_Grotesk'] leading-tight"
+/>
           </motion.div>
 
           {/* Description */}
@@ -200,11 +239,20 @@ function HeroSection() {
             transition={{ delay: 0.9 }}
             className="flex gap-4 pt-4"
           >
-            <button className="px-6 py-3 bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-lg font-semibold flex items-center gap-2 hover:shadow-lg hover:shadow-blue-700/50 transition-all font-['Inter']">
-              <Briefcase className="w-5 h-5" />
-              View Projects
-            </button>
-            <button className="px-6 py-3 bg-white/5 border border-blue-700/30 text-white rounded-lg font-semibold flex items-center gap-2 hover:bg-white/10 hover:border-blue-600/50 transition-all font-['Inter']">
+            <button 
+              onClick={() => router.push('/projects')}
+              className="px-6 py-3 text-white rounded-lg font-semibold flex items-center gap-2 hover:shadow-lg hover:shadow-blue-700/50 transition-all font-['Inter']"
+  style={{
+    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+  }}
+>
+  <Briefcase className="w-5 h-5" />
+  View Projects
+</button>
+            <button 
+              onClick={() => setIsContactModalOpen(true)}
+              className="px-6 py-3 bg-white/5 border border-blue-700/30 text-white rounded-lg font-semibold flex items-center gap-2 hover:bg-white/10 hover:border-blue-600/50 transition-all font-['Inter']"
+            >
               <MessageCircle className="w-5 h-5" />
               Contact Me
             </button>
@@ -261,13 +309,20 @@ function HeroSection() {
         >
           <div className="w-full max-w-[500px] h-[500px]">
             <DotLottieReact
-              src="https://lottie.host/a55b1709-f520-4e09-8bf1-e9025e4dd155/oSNmuXMbsP.lottie"
+              src="https://lottie.host/27778986-b35e-4aee-b796-7fa15e21fb72/8ekz2JoJf4.lottie"
               loop
               autoplay
             />
           </div>
         </motion.div>
       </div>
+
+      {/* Contact Modal - Landscape variant */}
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)}
+        variant="landscape"
+      />
     </section>
   );
 }
@@ -276,6 +331,7 @@ function HeroSection() {
 export default function Home() {
   return (
     <div className="gradient-bg">
+      <GlowBackground />
       <Header />
       <HeroSection />
       <About />

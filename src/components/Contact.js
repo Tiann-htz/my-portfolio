@@ -82,21 +82,21 @@ export default function Contact() {
       icon: Instagram, 
       title: 'Instagram', 
       subtitle: 'htz.tiann',
-      link: 'https://instagram.com/htz.tiann',
+      link: 'https://www.instagram.com/htz.tiann',
       color: '#E4405F'
     },
     { 
       icon: Github, 
       title: 'GitHub', 
       subtitle: 'Tian-htz',
-      link: 'https://github.com/Tian-htz',
+      link: 'https://github.com/Tiann-htz',
       color: '#FFFFFF'
     },
     { 
       icon: Facebook, 
       title: 'Facebook', 
       subtitle: 'ChrisTian Paete',
-      link: 'https://facebook.com',
+      link: 'https://web.facebook.com/Tiannn.s.092',
       color: '#1877F2'
     },
   ];
@@ -236,14 +236,20 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <motion.h2 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold gradient-text font-['Space_Grotesk'] mb-4"
-          >
-            Contact Me
-          </motion.h2>
+  initial={{ opacity: 0, scale: 0.8 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: false, amount: 0.3 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  className="text-5xl md:text-6xl font-bold font-['Space_Grotesk'] mb-4"
+  style={{
+    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+    backgroundClip: 'text',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  }}
+>
+  Contact Me
+</motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -327,14 +333,17 @@ export default function Contact() {
 
                 {/* Submit Button with Loading and Success States */}
                 <button
-                  type="submit"
-                  disabled={isSendingEmail || emailSuccess}
-                  className={`w-full px-6 py-3 text-white rounded-xl font-semibold flex items-center justify-center gap-2 transition-all font-['Inter'] ${
-                    emailSuccess 
-                      ? 'bg-green-600 hover:bg-green-600'
-                      : 'bg-gradient-to-r from-blue-600 to-blue-500 hover:shadow-lg hover:shadow-blue-500/50'
-                  } ${isSendingEmail ? 'opacity-75 cursor-not-allowed' : ''}`}
-                >
+  type="submit"
+  disabled={isSendingEmail || emailSuccess}
+  style={!emailSuccess ? {
+    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+  } : {}}
+  className={`w-full px-6 py-3 text-white rounded-xl font-semibold flex items-center justify-center gap-2 transition-all font-['Inter'] hover:shadow-lg hover:shadow-blue-500/50 ${
+    emailSuccess 
+      ? 'bg-green-600 hover:bg-green-600'
+      : ''
+  } ${isSendingEmail ? 'opacity-75 cursor-not-allowed' : ''}`}
+>
                   {isSendingEmail ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" />
@@ -508,14 +517,17 @@ export default function Contact() {
 
                 {/* Post Comment Button with Loading and Success States */}
                 <button
-                  type="submit"
-                  disabled={isSubmitting || submitSuccess}
-                  className={`w-full px-6 py-3 text-white rounded-xl font-semibold flex items-center justify-center gap-2 transition-all font-['Inter'] ${
-                    submitSuccess 
-                      ? 'bg-green-600 hover:bg-green-600'
-                      : 'bg-gradient-to-r from-blue-600 to-blue-500 hover:shadow-lg hover:shadow-blue-500/50'
-                  } ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
-                >
+  type="submit"
+  disabled={isSubmitting || submitSuccess}
+  style={!submitSuccess ? {
+    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+  } : {}}
+  className={`w-full px-6 py-3 text-white rounded-xl font-semibold flex items-center justify-center gap-2 transition-all font-['Inter'] hover:shadow-lg hover:shadow-blue-500/50 ${
+    submitSuccess 
+      ? 'bg-green-600 hover:bg-green-600'
+      : ''
+  } ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
+>
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" />

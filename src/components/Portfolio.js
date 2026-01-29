@@ -25,7 +25,7 @@ export default function Portfolio() {
         '/projects/bookborrowingwebsite.png',
         '/projects/bookborrowingwebsite1.png',
       ],
-      visitSite: null, // No visit site for this project
+      visitSite: null,
     },
     // Add more projects here later
   ];
@@ -72,14 +72,20 @@ export default function Portfolio() {
           className="text-center mb-12"
         >
           <motion.h2 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold gradient-text font-['Space_Grotesk'] mb-4"
-          >
-            Portfolio Showcase
-          </motion.h2>
+  initial={{ opacity: 0, scale: 0.8 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: false, amount: 0.3 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  className="text-5xl md:text-6xl font-bold font-['Space_Grotesk'] mb-4"
+  style={{
+    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+    backgroundClip: 'text',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  }}
+>
+  Portfolio Showcase
+</motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -103,6 +109,7 @@ export default function Portfolio() {
           {tabs.map((tab, index) => (
             <motion.button
               key={tab.id}
+              data-tab={tab.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
@@ -252,7 +259,7 @@ export default function Portfolio() {
                   whileHover={{ y: -8, scale: 1.05, transition: { duration: 0.3 } }}
                   className="bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all flex flex-col items-center justify-center gap-3 group"
                 >
-                  {/* SVG Icon Placeholder - Replace with actual SVG later */}
+                  {/* SVG Icon Placeholder */}
                   <div 
                     className="w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0"
                     style={{ backgroundColor: `${tech.color}20` }}
@@ -322,7 +329,7 @@ export default function Portfolio() {
                 <div className="grid md:grid-cols-2 gap-8 p-8">
                   {/* Left Side - Images */}
                   <div className="space-y-4">
-                    {/* Main Image - Wider and Less Rounded */}
+                    {/* Main Image */}
                     <div className="relative w-full h-[500px] rounded-lg overflow-hidden bg-gray-900/50">
                       <Image
                         src={selectedProject.images[selectedImage]}
