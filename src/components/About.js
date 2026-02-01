@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import ContactModal from './ContactModal';
+import GlareHover from '@/components/GlareHover';
 
 export default function About({ onNavigateToProjects }) {
   const [tiltStyle, setTiltStyle] = useState({});
@@ -199,20 +200,34 @@ const [isContactModalOpen, setIsContactModalOpen] = useState(false); // Add this
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Profile Card - SLIDE FROM RIGHT */}
-          <motion.div
-            initial={{ opacity: 0, x: 150 }}
-            whileInView={{ opacity: 1, x: 300 }}  
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex items-center justify-center md:justify-start"
-          >
-            <div
-              className="relative w-80 h-96 rounded-2xl p-1 animated-border"
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              style={tiltStyle}
-            >
+         {/* Right Side - Profile Card with GlareHover - SLIDE FROM RIGHT */}
+<motion.div
+  initial={{ opacity: 0, x: 150 }}
+  whileInView={{ opacity: 1, x: 300 }}  
+  viewport={{ once: false, amount: 0.3 }}
+  transition={{ duration: 0.8, delay: 0.4 }}
+  className="flex items-center justify-center md:justify-start"
+>
+  <GlareHover
+    width="320px"
+    height="384px"
+    background="transparent"
+    borderRadius="16px"
+    borderColor="rgba(59, 130, 246, 0.3)"
+    glareColor="#a5a5a5ff"
+    glareOpacity={0.7}
+    glareAngle={-30}
+    glareSize={400}
+    transitionDuration={3500}
+    playOnce={false}
+    className="animated-border p-1"
+    style={tiltStyle}
+  >
+    <div
+      className="relative w-full h-full rounded-2xl"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
               {/* Card Content with Image as Background */}
               <div className="relative w-full h-full rounded-2xl overflow-hidden">
                 {/* Background Image - Full Card */}
@@ -258,10 +273,11 @@ const [isContactModalOpen, setIsContactModalOpen] = useState(false); // Add this
   Contact Me
 </button>
                 </div>
-              </div>
             </div>
-          </motion.div>
-        </div>
+            </div>
+          </GlareHover>
+        </motion.div>
+      </div>
 
         {/* Stats Cards - Bottom Row (Full Width) */}
         <motion.div

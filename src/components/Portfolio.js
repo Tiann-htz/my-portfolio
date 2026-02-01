@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FolderGit2, Award, Code2, ExternalLink, Info, X } from 'lucide-react';
 import { useState } from 'react';
 import Image from 'next/image';
+import { techStackData, toolsData } from '@/data/TechStack';
 
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState('projects');
@@ -235,69 +236,119 @@ export default function Portfolio() {
             </motion.div>
           )}
 
-          {/* TECH STACK TAB */}
-          {activeTab === 'techstack' && (
-            <motion.div
-              key="techstack"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-2 md:grid-cols-6 gap-6"
+{/* TECH STACK TAB */}
+{activeTab === 'techstack' && (
+  <>
+    {/* Tech Stack Grid */}
+    <motion.div
+      key="techstack"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+      className="grid grid-cols-2 md:grid-cols-6 gap-6"
+    >
+      {techStackData.map((tech, index) => (
+        <motion.div
+          key={tech.id}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ 
+            delay: 0.1 + index * 0.05,
+            duration: 0.4,
+            ease: [0.25, 0.1, 0.25, 1]
+          }}
+          whileHover={{ y: -8, scale: 1.05, transition: { duration: 0.3 } }}
+          className="bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all flex flex-col items-center justify-center gap-3 group"
+        >
+          {/* SVG Icon or Image */}
+          <div 
+            className="w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: `${tech.color}20` }}
+          >
+            {tech.useImage ? (
+              <Image
+                src={tech.imageUrl}
+                alt={tech.name}
+                width={80}
+                height={80}
+                className="group-hover:scale-110 transition-transform"
+              />
+            ) : (
+              tech.svg
+            )}
+          </div>
+          
+          {/* Tech Name */}
+          <span className="text-white text-sm font-semibold text-center font-['Inter'] group-hover:text-blue-400 transition-colors">
+            {tech.name}
+          </span>
+        </motion.div>
+      ))}
+    </motion.div>
+
+    {/* Tools & IDE Section */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+      className="mt-16"
+    >
+      {/* Tools Header */}
+      <motion.h3
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="text-3xl font-bold text-white font-['Space_Grotesk'] mb-8 text-center"
+      >
+        Tools & IDE
+      </motion.h3>
+
+      {/* Tools Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
+        {toolsData.map((tool, index) => (
+          <motion.div
+            key={tool.id}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ 
+              delay: 0.5 + index * 0.05,
+              duration: 0.4,
+              ease: [0.25, 0.1, 0.25, 1]
+            }}
+            whileHover={{ y: -8, scale: 1.05, transition: { duration: 0.3 } }}
+            className="bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all flex flex-col items-center justify-center gap-3 group"
+          >
+            {/* SVG Icon or Image */}
+            <div 
+              className="w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0"
+              style={{ backgroundColor: `${tool.color}20` }}
             >
-              {techStack.map((tech, index) => (
-                <motion.div
-                  key={tech.id}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ 
-                    delay: 0.1 + index * 0.05,
-                    duration: 0.4,
-                    ease: [0.25, 0.1, 0.25, 1]
-                  }}
-                  whileHover={{ y: -8, scale: 1.05, transition: { duration: 0.3 } }}
-                  className="bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all flex flex-col items-center justify-center gap-3 group"
-                >
-                  {/* SVG Icon Placeholder */}
-                  <div 
-                    className="w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: `${tech.color}20` }}
-                  >
-                    <svg 
-                      width="40" 
-                      height="40" 
-                      viewBox="0 0 40 40"
-                      className="group-hover:scale-110 transition-transform"
-                    >
-                      <rect 
-                        width="40" 
-                        height="40" 
-                        rx="8" 
-                        fill={tech.color}
-                        opacity="0.8"
-                      />
-                      <text
-                        x="20"
-                        y="25"
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize="16"
-                        fontWeight="bold"
-                      >
-                        {tech.name.charAt(0)}
-                      </text>
-                    </svg>
-                  </div>
-                  
-                  {/* Tech Name */}
-                  <span className="text-white text-sm font-semibold text-center font-['Inter'] group-hover:text-blue-400 transition-colors">
-                    {tech.name}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
+              {tool.useImage ? (
+                <Image
+                  src={tool.imageUrl}
+                  alt={tool.name}
+                  width={80}
+                  height={80}
+                  className="group-hover:scale-110 transition-transform"
+                />
+              ) : (
+                tool.svg
+              )}
+            </div>
+            
+            {/* Tool Name */}
+            <span className="text-white text-sm font-semibold text-center font-['Inter'] group-hover:text-blue-400 transition-colors">
+              {tool.name}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  </>
+)}
         </AnimatePresence>
 
         {/* PROJECT MODAL */}
