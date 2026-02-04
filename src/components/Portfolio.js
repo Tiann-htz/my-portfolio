@@ -2,12 +2,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FolderGit2, Award, Code2, ExternalLink, Info, X } from 'lucide-react';
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { techStackData, toolsData } from '@/data/TechStack';
+import { certificatesData } from '@/data/Certificates';
 
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState('projects');
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedCertificate, setSelectedCertificate] = useState(null);
 
   const tabs = [
     { id: 'projects', name: 'Projects', icon: FolderGit2 },
@@ -29,26 +32,6 @@ export default function Portfolio() {
       visitSite: null,
     },
     // Add more projects here later
-  ];
-
-  const certificates = [
-    { id: 1, image: '/certificates/phpmysql.jpg' },
-    // Add more certificates here later
-  ];
-
-  const techStack = [
-    { id: 1, name: 'React', color: '#61DAFB' },
-    { id: 2, name: 'JavaScript', color: '#F7DF1E' },
-    { id: 3, name: 'TypeScript', color: '#3178C6' },
-    { id: 4, name: 'Node.js', color: '#339933' },
-    { id: 5, name: 'Next.js', color: '#000000' },
-    { id: 6, name: 'Tailwind CSS', color: '#06B6D4' },
-    { id: 7, name: 'Firebase', color: '#FFCA28' },
-    { id: 8, name: 'MongoDB', color: '#47A248' },
-    { id: 9, name: 'Git', color: '#F05032' },
-    { id: 10, name: 'HTML5', color: '#E34F26' },
-    { id: 11, name: 'CSS3', color: '#1572B6' },
-    { id: 12, name: 'Python', color: '#3776AB' },
   ];
 
   const openModal = (project) => {
@@ -200,41 +183,61 @@ export default function Portfolio() {
           )}
 
           {/* CERTIFICATES TAB */}
-          {activeTab === 'certificates' && (
-            <motion.div
-              key="certificates"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
-              {certificates.map((cert, index) => (
-                <motion.div
-                  key={cert.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ 
-                    delay: 0.2 + index * 0.15,
-                    duration: 0.5,
-                    ease: [0.25, 0.1, 0.25, 1]
-                  }}
-                  whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3 } }}
-                  className="bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all cursor-pointer"
-                >
-                  <div className="relative h-80 overflow-hidden bg-gray-900/50">
-                    <Image
-                      src={cert.image}
-                      alt="Certificate"
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
+{activeTab === 'certificates' && (
+  <motion.div
+    key="certificates"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.5 }}
+  >
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {certificatesData.slice(0, 6).map((cert, index) => (
+        <motion.div
+          key={cert.id}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ 
+            delay: 0.2 + index * 0.15,
+            duration: 0.5,
+            ease: [0.25, 0.1, 0.25, 1]
+          }}
+          whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3 } }}
+          onClick={() => setSelectedCertificate(cert)}
+          className="rounded-3xl overflow-hidden transition-all cursor-pointer"
+        >
+          <div className="relative h-80 overflow-hidden">
+            <Image
+              src={cert.image}
+              alt={cert.title}
+              fill
+              className="object-scale-down hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        </motion.div>
+      ))}
+    </div>
+
+    {/* See More Button - Only shows if there are more than 6 certificates */}
+    {certificatesData.length > 6 && (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+        className="mt-8 flex justify-end"
+      >
+        <Link
+          href="/certificates"
+          className="px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold hover:bg-white/20 transition-all font-['Inter'] flex items-center gap-2"
+        >
+          See More
+          <Award className="w-5 h-5" />
+        </Link>
+      </motion.div>
+    )}
+  </motion.div>
+)}
 
 {/* TECH STACK TAB */}
 {activeTab === 'techstack' && (
@@ -350,6 +353,38 @@ export default function Portfolio() {
   </>
 )}
         </AnimatePresence>
+
+        {/* CERTIFICATE MODAL */}
+<AnimatePresence>
+  {selectedCertificate && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setSelectedCertificate(null)}
+      className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+    >
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.5, opacity: 0 }}
+        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative max-w-6xl w-full max-h-[90vh] rounded-3xl border-4 border-white overflow-hidden bg-white shadow-2xl"
+      >
+        {/* Certificate Image */}
+        <div className="relative w-full h-[85vh]">
+          <Image
+            src={selectedCertificate.image}
+            alt={selectedCertificate.title}
+            fill
+            className="object-contain"
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
         {/* PROJECT MODAL */}
         <AnimatePresence>
