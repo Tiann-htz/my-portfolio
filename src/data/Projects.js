@@ -4,7 +4,7 @@ export const projectsData = [
     order: 1,
     title: 'Chronyx Mobile App',
     type: 'Mobile App',
-    shortDescription: 'A mobile application that connects to the Chrony X admin portal, featuring QR code functionality for employee check-ins, attendance tracking, and salary management.',
+    shortDescription: 'A mobile application that connects to the Chronyx admin portal, featuring QR code functionality for employee check-ins, attendance tracking, and salary management.',
     techStack: ['React Native', 'Expo', 'JavaScript', 'phpMyAdmin', 'SQL'],
     images: [
       '/projects/chronyxapp.png',

@@ -78,41 +78,29 @@ function IntroLoading({ onLoadingComplete }) {
           transition={{ duration: 1 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black overflow-hidden"
         >
-          {/* Running Gradient Background - Left to Right - Dark Blue, Teal, Purple, Blue, Black */}
-          <motion.div
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(90deg, #000000 0%, #001a33 10%, #0d1b2a 20%, #1a0a2e 30%, #002147 40%, #000000 50%, #001a33 60%, #0d1b2a 70%, #1a0a2e 80%, #002147 90%, #000000 100%)',
-              backgroundSize: '200% 100%',
-              filter: 'blur(60px)',
-            }}
-            animate={{
-              backgroundPosition: ['-100% 0%', '0% 0%'],
-            }}
-            transition={{
-              duration: 8,
-              ease: 'linear',
-              repeat: Infinity,
-            }}
-          />
-
-          {/* Additional blur layer for smoothness */}
-          <motion.div
-            className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(circle at 50% 50%, rgba(10, 10, 26, 0.4) 0%, transparent 70%)',
-              filter: 'blur(40px)',
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.5, 0.8, 0.5],
-            }}
-            transition={{
-              duration: 6,
-              ease: 'easeInOut',
-              repeat: Infinity,
-            }}
-          />
+         {/* Video Background */}
+<div className="absolute inset-0 overflow-hidden">
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="absolute inset-0 w-full h-full object-cover"
+    style={{
+      filter: 'blur(30px)',
+    }}
+  >
+    <source src="/colorbends.webm" type="video/webm" />
+  </video>
+  
+  {/* Optional: Dark overlay to make text more readable */}
+  <div 
+    className="absolute inset-0 bg-black/30"
+    style={{
+      mixBlendMode: 'multiply',
+    }}
+  />
+</div>
 
           <div className="text-center space-y-8 px-4 relative z-10">
             {/* Icons Animation */}
