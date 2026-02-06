@@ -5,26 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import GlowBackground from '@/components/ui/GlowBackground';
 import Footer from '@/components/Footer';
+import { getSortedProjects } from '@/data/Projects';
 
 export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedProjectImage, setSelectedProjectImage] = useState(null);
 
-  const projects = [
-    {
-      id: 1,
-      title: 'Book Borrowing Platform Website',
-      type: 'Web System',
-      shortDescription: 'A simple book borrowing platform website that using CRUD, storing books information, managing user borrowing records, and providing an intuitive interface for library management.',
-      techStack: ['React JS', 'Vite', 'Node.js', 'Firebase', 'TypeScript'],
-      images: [
-        '/projects/bookborrowingwebsite.png',
-        '/projects/bookborrowingwebsite1.png',
-      ],
-      visitSite: null,
-    },
-    // Add more projects here later
-  ];
+  const projects = getSortedProjects();
 
   const openModal = (project) => {
     setSelectedProject(project);
@@ -37,31 +25,33 @@ export default function ProjectsPage() {
   };
 
   return (
-  <div className="gradient-bg min-h-screen">
-    <GlowBackground />
-    
-    {/* Header */}
-    <motion.header
+    <div className="gradient-bg min-h-screen">
+      <GlowBackground />
+      
+      {/* Header */}
+      <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="fixed top-0 left-0 right-0 z-40 bg-black/10 backdrop-blur-xl"
       >
         <div className="container mx-auto px-6 py-4">
-          <Link href="/" className="text-3xl font-bold font-['Space_Grotesk'] hover:opacity-80 transition-opacity"
-  style={{
-    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
-    backgroundClip: 'text',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  }}
->
-  &lt;Tian/&gt;
-</Link>
+          <Link 
+            href="/" 
+            className="text-3xl font-bold font-['Space_Grotesk'] hover:opacity-80 transition-opacity"
+            style={{
+              background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            &lt;Tian/&gt;
+          </Link>
         </div>
       </motion.header>
 
-      {/* Projects Section - Added pt-32 for header spacing */}
+      {/* Projects Section */}
       <section className="px-6 py-32 pt-32">
         <div className="container mx-auto relative z-10">
           {/* Header */}
@@ -78,16 +68,17 @@ export default function ProjectsPage() {
               className="flex items-center justify-center gap-3 mb-6"
             >
               <FolderGit2 className="w-12 h-12 text-blue-500" />
-              <h1 className="text-5xl md:text-7xl font-bold font-['Space_Grotesk']"
-  style={{
-    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
-    backgroundClip: 'text',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  }}
->
-  My Projects
-</h1>
+              <h1 
+                className="text-5xl md:text-7xl font-bold font-['Space_Grotesk']"
+                style={{
+                  background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                My Projects
+              </h1>
             </motion.div>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -210,8 +201,11 @@ export default function ProjectsPage() {
               <div className="grid md:grid-cols-2 gap-8 p-8">
                 {/* Left Side - Images */}
                 <div className="space-y-4">
-                  {/* Main Image */}
-                  <div className="relative w-full h-[500px] rounded-lg overflow-hidden bg-gray-900/50">
+                  {/* Main Image - Clickable */}
+                  <div 
+                    className="relative w-full h-[500px] rounded-lg overflow-hidden bg-gray-900/50 cursor-pointer"
+                    onClick={() => setSelectedProjectImage(selectedProject.images[selectedImage])}
+                  >
                     <Image
                       src={selectedProject.images[selectedImage]}
                       alt={selectedProject.title}
@@ -290,6 +284,38 @@ export default function ProjectsPage() {
                     </a>
                   )}
                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* PROJECT IMAGE ZOOM MODAL */}
+      <AnimatePresence>
+        {selectedProjectImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProjectImage(null)}
+            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] flex items-center justify-center p-6"
+          >
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-6xl w-full max-h-[90vh] rounded-3xl border-4 border-white overflow-hidden bg-white shadow-2xl"
+            >
+              {/* Project Image */}
+              <div className="relative w-full h-[85vh]">
+                <Image
+                  src={selectedProjectImage}
+                  alt="Project preview"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </motion.div>
           </motion.div>
