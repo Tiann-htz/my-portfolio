@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import ContactModal from './ContactModal';
-import GlareHover from '@/components/GlareHover';
+import GlareHover from '@/components/ui/GlareHover';
 
 export default function About({ onNavigateToProjects }) {
   const [tiltStyle, setTiltStyle] = useState({});
