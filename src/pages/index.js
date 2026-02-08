@@ -90,12 +90,12 @@ function IntroLoading({ onLoadingComplete }) {
       filter: 'blur(30px)',
     }}
   >
-    <source src="/colorbends.webm" type="video/webm" />
+    <source src="/colorbends.mp4" type="video/mp4" />
   </video>
   
   {/* Optional: Dark overlay to make text more readable */}
   <div 
-    className="absolute inset-0 bg-black/30"
+    className="absolute inset-0 bg-black/50"
     style={{
       mixBlendMode: 'multiply',
     }}

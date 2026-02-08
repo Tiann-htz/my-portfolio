@@ -290,37 +290,37 @@ export default function ProjectsPage() {
         )}
       </AnimatePresence>
 
-      {/* PROJECT IMAGE ZOOM MODAL */}
-      <AnimatePresence>
-        {selectedProjectImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedProjectImage(null)}
-            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] flex items-center justify-center p-6"
-          >
-            <motion.div
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-6xl w-full max-h-[90vh] rounded-3xl border-4 border-white overflow-hidden bg-white shadow-2xl"
-            >
-              {/* Project Image */}
-              <div className="relative w-full h-[85vh]">
-                <Image
-                  src={selectedProjectImage}
-                  alt="Project preview"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+     {/* PROJECT IMAGE ZOOM MODAL */}
+<AnimatePresence>
+  {selectedProjectImage && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setSelectedProjectImage(null)}
+      className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] flex items-center justify-center p-6"
+    >
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.5, opacity: 0 }}
+        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative max-w-6xl w-full max-h-[90vh] rounded-3xl border-2 border-white/30 overflow-hidden bg-white/10 backdrop-blur-xl shadow-2xl"
+      >
+        {/* Project Image */}
+        <div className="relative w-full h-[85vh]">
+          <Image
+            src={selectedProjectImage}
+            alt="Project preview"
+            fill
+            className="object-contain"
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </div>
   );
 }

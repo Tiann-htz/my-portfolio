@@ -170,22 +170,23 @@ export default function Portfolio() {
               </div>
 
               {/* See More Button - Only shows if there are more than 6 projects */}
-              {getSortedProjects().length > 6 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                  className="mt-8 flex justify-end"
-                >
-                  <Link
-                    href="/projects"
-                    className="px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold hover:bg-white/20 transition-all font-['Inter'] flex items-center gap-2"
-                  >
-                    See More
-                    <FolderGit2 className="w-5 h-5" />
-                  </Link>
-                </motion.div>
-              )}
+{getSortedProjects().length > 6 && (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: false, amount: 0.3 }}
+    transition={{ duration: 0.5, delay: 0.8 }}
+    className="mt-8 flex justify-end"
+  >
+    <Link
+      href="/projects"
+      className="px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold hover:bg-white/20 transition-all font-['Inter'] flex items-center gap-2"
+    >
+      See More
+      <FolderGit2 className="w-5 h-5" />
+    </Link>
+  </motion.div>
+)}
             </motion.div>
           )}
 
@@ -227,22 +228,23 @@ export default function Portfolio() {
               </div>
 
               {/* See More Button - Only shows if there are more than 6 certificates */}
-              {certificatesData.length > 6 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                  className="mt-8 flex justify-end"
-                >
-                  <Link
-                    href="/certificates"
-                    className="px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold hover:bg-white/20 transition-all font-['Inter'] flex items-center gap-2"
-                  >
-                    See More
-                    <Award className="w-5 h-5" />
-                  </Link>
-                </motion.div>
-              )}
+{certificatesData.length > 6 && (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: false, amount: 0.3 }}
+    transition={{ duration: 0.5, delay: 0.8 }}
+    className="mt-8 flex justify-end"
+  >
+    <Link
+      href="/certificates"
+      className="px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold hover:bg-white/20 transition-all font-['Inter'] flex items-center gap-2"
+    >
+      See More
+      <Award className="w-5 h-5" />
+    </Link>
+  </motion.div>
+)}
             </motion.div>
           )}
 
@@ -540,7 +542,7 @@ export default function Portfolio() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={() => setSelectedProjectImage(null)}
-      className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] flex items-center justify-center p-6"
+      className="fixed inset-0 backdrop-blur-sm z-[70] flex items-center justify-center p-6"
     >
       <motion.div
         initial={{ scale: 0.5, opacity: 0 }}
@@ -548,7 +550,7 @@ export default function Portfolio() {
         exit={{ scale: 0.5, opacity: 0 }}
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         onClick={(e) => e.stopPropagation()}
-        className="relative max-w-6xl w-full max-h-[90vh] rounded-3xl border-4 border-white overflow-hidden bg-white shadow-2xl"
+        className="relative max-w-6xl w-full max-h-[90vh] rounded-3xl  overflow-hidden shadow-2xl"
       >
         {/* Project Image */}
         <div className="relative w-full h-[85vh]">
