@@ -341,12 +341,12 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'blur(10px)' }}
         >
-          <source src="/lightpillar.mp4" type="video/mp4" />
+          <source src="/color-bends.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay — adjust rgba alpha (0.75) to make it lighter or darker */}
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.63)' }}
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
         />
       </div>
 

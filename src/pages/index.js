@@ -87,15 +87,15 @@ function IntroLoading({ onLoadingComplete }) {
     playsInline
     className="absolute inset-0 w-full h-full object-cover"
     style={{
-      filter: 'blur(30px)',
+      filter: 'blur(5px)',
     }}
   >
-    <source src="/colorbends.mp4" type="video/mp4" />
+    <source src="/liquid.mp4" type="video/mp4" />
   </video>
   
   {/* Optional: Dark overlay to make text more readable */}
   <div 
-    className="absolute inset-0 bg-black/50"
+    className="absolute inset-0 bg-black/10"
     style={{
       mixBlendMode: 'multiply',
     }}
