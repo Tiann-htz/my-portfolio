@@ -142,21 +142,21 @@ function IntroLoading({ onLoadingComplete }) {
               {/* Second line - Portfolio Website - Both slide up */}
               <div className="flex justify-center gap-x-3 text-4xl md:text-5xl font-bold font-['Space_Grotesk']">
                 {line2Words.map((word, index) => (
-                  <motion.span
-                    key={word}
-                    custom={index}
-                    variants={slideUpVariant}
-                    initial="hidden"
-                    animate="visible"
-                    style={{
-                      background: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 25%, #2563eb 50%, #1d4ed8 75%, #1e40af 100%)',
-                      backgroundClip: 'text',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                    }}
-                  >
-                    {word}
-                  </motion.span>
+                 <motion.span
+  key={word}
+  custom={index}
+  variants={slideUpVariant}
+  initial="hidden"
+  animate="visible"
+  style={{
+    background: 'linear-gradient(135deg, #ffffff 0%, #e0e7ff 20%, #c7d2fe 40%, #a5b4fc 60%, #818cf8 80%, #6366f1 100%)',
+    backgroundClip: 'text',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  }}
+>
+  {word}
+</motion.span>
                 ))}
               </div>
             </div>

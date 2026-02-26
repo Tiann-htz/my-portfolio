@@ -48,7 +48,7 @@ function Header() {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
-      const headerOffset = 80; // Height of your fixed header
+      const headerOffset = -25; // Height of your fixed header
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -68,7 +68,7 @@ function Header() {
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-3xl font-bold font-['Space_Grotesk']"
+        <Link href="/" className="text-3xl font-bold font-['Fira_Code']"
   style={{
     background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
     backgroundClip: 'text',
@@ -91,22 +91,22 @@ function Header() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 * index, duration: 0.5 }}
-      style={isActive ? {
-        background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
-        backgroundClip: 'text',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-      } : {}}
+    style={isActive ? {
+  background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+  backgroundClip: 'text',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+} : {}}
       className={`transition-colors font-medium text-lg font-['Inter'] relative group ${
         isActive ? '' : 'text-gray-300 hover:text-white'
       }`}
               >
                 {item.name}
-                <span 
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-700 to-blue-500 transition-all duration-300 ${
-                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                  }`}
-                />
+               <span 
+  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-700 to-blue-500 transition-all duration-300 ${
+    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+  }`}
+/>
               </motion.a>
             );
           })}
@@ -123,7 +123,7 @@ function HeroSection() {
   
   const techStack = [
     { name: 'React', color: '#61DAFB' },
-    { name: 'JavaScript', color: '#F7DF1E' },
+    { name: 'Java', color: '#F7DF1E' },
     { name: 'Next.js', color: '#FFFFFF' },
     { name: 'Tailwind', color: '#06B6D4' },
   ];
@@ -239,11 +239,11 @@ function HeroSection() {
             transition={{ delay: 0.9 }}
             className="flex gap-4 pt-4"
           >
-            <button 
-              onClick={() => router.push('/projects')}
-              className="px-6 py-3 text-white rounded-lg font-semibold flex items-center gap-2 hover:shadow-lg hover:shadow-blue-700/50 transition-all font-['Inter']"
+           <button 
+  onClick={() => router.push('/projects')}
+  className="px-6 py-3 text-white rounded-lg font-semibold flex items-center gap-2 hover:shadow-lg hover:shadow-indigo-700/50 transition-all font-['Inter']"
   style={{
-    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 60%, #1e40af 100%)',
+    background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 25%, #3b82f6 50%, #2dd4bf 100%)',
   }}
 >
   <Briefcase className="w-5 h-5" />
